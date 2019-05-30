@@ -77,6 +77,8 @@ A resolvers have a same functionality like a controller . He help us to resolve 
     ...
 ```
 
+<!-- ![image]( =250x) -->
+
 # GraphQL Schemas
 
 By default, we already have a DB Schemas , and GraphQL schema strictly defines what resources , how they relate , and how a client and consume them .
@@ -111,15 +113,14 @@ By default, we already have a DB Schemas , and GraphQL schema strictly defines w
 
 Describe resources that will be used in queries and mutations.
 
-> Scalar types are build in primitives .
+* Scalar types are build in primitives
+    - String
+    - Int
+    - Float
+    - Boolean ( True or False)
+    - ID ( references to a unique id , like a primary key in database)
 
-* String
-* Int
-* Float
-* Boolean ( True or False)
-* ID ( references to a unique id , like a primary key in database)
-
-> Object types are custom shapes with fields that either scalar types or other object types . We use the keyword ```type``` .
+* Object types are custom shapes with fields that either scalar types or other object types . We use the keyword ```type``` .
 
 ```typescript
     type Cat {
@@ -127,4 +128,45 @@ Describe resources that will be used in queries and mutations.
         age: Int!
         bestFriend : Cat
     }
+```
+
+* Object types fields also describe any arguments and or validations.
+
+* Types are the target or all requests .
+
+The objective of a GraphQL , is to *resolve types* , and the objective of query os to get the types in the formatted way that you describe , that's allowed to you by the schema .
+
+* Schema cheatsheet
+
+![graphql](https://raw.githubusercontent.com/sogko/graphql-shorthand-notation-cheat-sheet/master/graphql-shorthand-notation-cheat-sheet.png)
+
+## Query & Mutation types
+
+Create, Read , Update and Delete  on your GraphQL API.
+
+* Query type describes the different queries your API is capable of ( getOne and getMany)
+
+* A query operation is just a name , with possible arguments that eventually returns type .
+
+* A mutation is the same thing but with the intent of mutating the DB vs just reading . Mutation is for update , create and delete . With mutations , the most past of time we need it to change something in a datababse .
+
+* Queries and Mutations are what will be available to clients with your API , think of them as your routes .
+
+The Queries and Mutations are your routes , they're what your API can do .
+
+## Writing a Mutation Types
+
+
+```typescript
+
+input CatInput {
+    name: String
+    age: Int!
+    bestFriend : Cat!
+}
+
+type Mutation {
+    newCat(input: CatInput!): Cat!
+}
+
 ```

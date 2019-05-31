@@ -156,7 +156,6 @@ The Queries and Mutations are your routes , they're what your API can do .
 
 ## Writing a Mutation Types
 
-
 ```typescript
 
 input CatInput {
@@ -170,3 +169,28 @@ type Mutation {
 }
 
 ```
+
+# GraphQL Resolvers
+
+Like controllers , but instead resolve types all the way down .
+
+* Resolvers are like controllers in a REST API . They are responsible for retrieving data .
+
+* Every query and mutation your schema has , must have a resolver that treturns the specified type .
+
+* Types and fields on types often have resolvers as well .
+
+* Incoming query dictates what resolvers run and in what order .
+
+## Creating resolvers
+
+Return the same shap as described in the schema , or delegate to another resolver .
+
+* Resolvers take a few args :
+    * starting object (what the parent resolver returned or starting value from server).
+
+    * args ( any arguments from the incoming request )
+
+    * context ( shared context object across all resolvers , like the req object in express)
+
+    * info ( advanced AST of the incoming request )
